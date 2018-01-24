@@ -1,0 +1,20 @@
+{
+  "name": "msg-box",
+  "version": "1.0.0",
+  "description": "Simple message box based on a dialog widget",
+  "main": "MsgBoxPure.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vyatkin0/MsgBox.git"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "author": "Aleksey Vyatkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vyatkin0/MsgBox/issues"
+  },
+  "homepage": "https://github.com/vyatkin0/MsgBox#readme"
+}

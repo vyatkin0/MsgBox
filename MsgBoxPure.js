@@ -90,18 +90,6 @@ async function TestA() {
 "use strict";
 
 (function(exports) {
-    //Icons
-    exports.Icons = /** @class */ (function () {
-        function Icons() {
-        }
-        Icons.Attention = "Attention.gif";
-        Icons.Error = "Error.gif";
-        Icons.Help = "Help.gif";
-        Icons.Information = "Information.gif";
-        Icons.Warning = "Warning.gif";
-        return Icons;
-    }());
-
     //Labels
     exports.Labels = /** @class */ (function () {
         function Labels() {
@@ -191,6 +179,9 @@ async function TestA() {
                 if (typeof opts.icon === "string")
                     this.icon = opts.icon;
 
+                if (typeof opts.icon_jqui === "string")
+                    this.icon_jqui = opts.icon_jqui;
+
                 if (typeof opts.onclose === "function")
                     this.onclose = opts.onclose;
             }
@@ -202,8 +193,9 @@ async function TestA() {
          * @returns {Object}
          */
         MessageBox.prototype.alert = function (text) {
-            if (this.icon === undefined)
-                this.icon = exports.Icons.Attention;
+            if (this.icon === undefined && this.icon_jqui === undefined)
+                this.icon_jqui = "ui-icon-alert";
+
             return this.display(1, text, this.focus);
         };
 
@@ -213,8 +205,9 @@ async function TestA() {
          * @returns {Object}
          */
         MessageBox.prototype.confirm = function (text) {
-            if (this.icon === undefined)
-                this.icon = exports.Icons.Information;
+            if (this.icon === undefined && this.icon_jqui === undefined)
+                this.icon_jqui = "ui-icon-help";
+
             return this.display(2, text, this.focus);
         };
 
@@ -277,6 +270,9 @@ async function TestA() {
             var img_html = "";
             if (this.icon)
                 img_html = "<td><img src='" + this.icon + "' border='0'/></td>";
+            else if(this.icon_jqui)
+                img_html = "<td><span class='ui-icon "+ this.icon_jqui + "'></span></td>";
+
             var dialogObj = $("<table><tr>" + img_html + "<td>" + text + "</td></tr></table>");
             var this_onclose = this.onclose;
 
