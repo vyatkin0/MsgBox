@@ -64,7 +64,7 @@ function Test() {
         }
     ];
 
-    m5.display(3, "Test custom buttons", 2);
+    m5.display(3, "Test custom buttons");
 
     //Using a returned thenable object
     MsgBox.MessageBox("Title Thenable").confirm("Thenable confirm").then((x) => { alert(x)});
@@ -92,7 +92,7 @@ async function TestA() {
 (function(exports) {
     //Labels
     exports.Labels = /** @class */ (function () {
-        function Labels() {
+     function Labels() {
         }
         Labels.OK = "OK";
         Labels.Cancel = "Cancel";
@@ -115,13 +115,19 @@ async function TestA() {
 
     exports.MessageBox = /** @class */ (function () {
 
+        /**
+         * Represents a Message Box.
+         * 
+         * @constructor
+         * @param {*} [parameter] - optional parameter
+         */
         function MessageBox(parameter) {
             if (!(this instanceof MessageBox)) {
                 return new MessageBox(parameter);
             }
 
-            this.cancel = false;
-            this.focus = 1;
+            this.cancel = false;//if true cancel button will be added
+            this.focus = 1;//number of tabbable elements that receives focus
             this.title = ""; //document.title;
 
             this.labels={};
@@ -188,36 +194,41 @@ async function TestA() {
         }
 
         /**
-         * Displays alert and returns a thenable object
+         * Displays alert and returns a thenable object.
          *
+         * @param {String} text - message text
          * @returns {Object}
          */
         MessageBox.prototype.alert = function (text) {
             if (this.icon === undefined && this.icon_jqui === undefined)
                 this.icon_jqui = "ui-icon-alert";
 
-            return this.display(1, text, this.focus);
+            return this.display(1, text);
         };
 
         /**
-         * Displays confirm and returns a thenable object
+         * Displays confirm and returns a thenable object.
          *
+         * @param {String} text - message text
          * @returns {Object}
          */
         MessageBox.prototype.confirm = function (text) {
             if (this.icon === undefined && this.icon_jqui === undefined)
                 this.icon_jqui = "ui-icon-help";
 
-            return this.display(2, text, this.focus);
+            return this.display(2, text);
         };
 
         /**
          * Displays custom message box and returns a thenable object
-         * the object is { then : Function; result: Object;}
+         * the object is { then : Function; result: Object;}.
          *
+         * @param {number} type - type of buttons set
+         * @param {String} text - message text
+         * @param {number} focus - number of tabbable elements that receives focus
          * @returns {Object}
          */
-        MessageBox.prototype.display = function (type, text, focus) {
+        MessageBox.prototype.display = function (type, text) {
             var return_value = this.values.unknown;
             var buttons = [];
             switch (type) {
@@ -286,6 +297,8 @@ async function TestA() {
                     };
                 }
             };
+
+            var focus = this.focus;
 
             dialogObj.dialog({
                 autoOpen: false,

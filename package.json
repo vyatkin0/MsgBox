@@ -1,5 +1,5 @@
 {
-  "name": "msg-box",
+  "name": "pure-msg-box",
   "version": "1.0.0",
   "description": "Simple message box based on a dialog widget",
   "main": "MsgBoxPure.js",

@@ -3,6 +3,8 @@ module.exports = {
         "browser": true
     },
     "extends": "eslint:recommended",
+    "plugins": ["prettier"],
+
     "rules": {
         "indent": [
             "error",
@@ -19,6 +21,7 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "prettier/prettier": "error"
     }
 };
